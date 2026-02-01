@@ -34,7 +34,7 @@ matchRouter.get("/", async (req, res) => {
   } catch (error) {
     res.status(500).json({
       error: "failed to list matches",
-      details: error.message,
+      details: parsed.error.issues,
     });
   }
 });
@@ -45,7 +45,7 @@ matchRouter.post("/", async (req, res) => {
   if (!parsed.success) {
     return res.status(400).json({
       error: "invalid request",
-      details: parsed.error.format(),
+      details: parsed.error.issues,
     });
   }
 
