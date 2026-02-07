@@ -75,7 +75,7 @@ commentaryRouter.get("/", async (req, res) => {
   if (!queryResult.success) {
     return res.status(400).json({
       error: "invalid query parameters",
-      details: parsedQuery.error.issues,
+      details: queryResult.error.issues,
     });
   }
 

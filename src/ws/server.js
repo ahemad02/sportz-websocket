@@ -14,7 +14,7 @@ function unsubscribe(matchId, socket) {
   const subscribers = matchSubscribers.get(matchId);
   if (!subscribers) return;
   subscribers.delete(socket);
-  if (matchSubscribers.size === 0) {
+  if (subscribers.size === 0) {
     matchSubscribers.delete(matchId);
   }
 }
@@ -59,6 +59,7 @@ function handleMessage(socket, data) {
       message: "Invalid JSON",
       details: error.message,
     });
+    return;
   }
 
   if (message?.type === "subscribe" && Number.isInteger(message.matchId)) {

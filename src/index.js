@@ -13,6 +13,7 @@ const app = express();
 const server = http.createServer(app);
 
 app.use(express.json());
+app.use(securityMiddleware());
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
@@ -20,8 +21,6 @@ app.get("/", (req, res) => {
 
 app.use("/matches", matchRouter);
 app.use("/matches/:id/commentary", commentaryRouter);
-
-app.use(securityMiddleware());
 
 const { broadCastMatchCreated, broadcastCommentary } =
   attachWebSocketServer(server);
